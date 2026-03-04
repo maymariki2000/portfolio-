@@ -1,116 +1,202 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="light" data-lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مي مريكي | تحليل البيانات وصناعة القرار</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <title>مي مريكي | محللة بيانات تنفيذية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Cairo:wght@300;400;600;700;900&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-gold: #F4D03F;
-            --secondary-gold: #F9E79F;
-            --accent-peach: #F5CBA7;
-            --dark-bg: #1a1a1a;
-            --light-bg: #f8f8f8;
-            --text-dark: #2c2c2c;
-            --text-light: #ffffff;
+            --gold: #C9A84C;
+            --gold-light: #E8C96E;
+            --gold-pale: #F5E9CC;
+            --gold-glow: rgba(201,168,76,0.15);
+            --ink: #1A1714;
+            --ink-soft: #3D3530;
+            --ink-muted: #7A6F68;
+            --paper: #FAF8F5;
+            --paper-warm: #F3EFE8;
+            --paper-mid: #EDE8DE;
+            --border: rgba(201,168,76,0.2);
+            --border-strong: rgba(201,168,76,0.4);
+            --shadow: 0 4px 32px rgba(26,23,20,0.08);
+            --shadow-lg: 0 20px 80px rgba(26,23,20,0.12);
+            --nav-bg: rgba(250,248,245,0.94);
+            --card-bg: #FFFFFF;
+            --section-alt: #F3EFE8;
+            --text-primary: #1A1714;
+            --text-secondary: #3D3530;
+            --text-muted: #7A6F68;
+            --hero-bg: linear-gradient(150deg, #FAF8F5 0%, #F0EBE0 50%, #E8DFD0 100%);
+            --contact-bg: #1A1714;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        [data-theme="dark"] {
+            --ink: #F0EBE0;
+            --ink-soft: #D4C9B8;
+            --ink-muted: #9A8F85;
+            --paper: #0F0D0B;
+            --paper-warm: #171410;
+            --paper-mid: #201C18;
+            --border: rgba(201,168,76,0.15);
+            --border-strong: rgba(201,168,76,0.3);
+            --shadow: 0 4px 32px rgba(0,0,0,0.3);
+            --shadow-lg: 0 20px 80px rgba(0,0,0,0.5);
+            --nav-bg: rgba(15,13,11,0.94);
+            --card-bg: #1A1612;
+            --section-alt: #141210;
+            --text-primary: #F0EBE0;
+            --text-secondary: #D4C9B8;
+            --text-muted: #9A8F85;
+            --hero-bg: linear-gradient(150deg, #0F0D0B 0%, #181410 50%, #1E1A14 100%);
+            --gold-pale: rgba(201,168,76,0.08);
+            --contact-bg: #0A0806;
         }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; font-size: 16px; }
 
         body {
             font-family: 'Tajawal', sans-serif;
-            color: var(--text-dark);
-            background: var(--light-bg);
+            background: var(--paper);
+            color: var(--text-primary);
             overflow-x: hidden;
+            transition: background 0.4s ease, color 0.4s ease;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
+        [data-lang="en"] .ar { display: none !important; }
+        [data-lang="ar"] .en { display: none !important; }
 
-        /* Navigation */
+        /* ─── NAVIGATION ─── */
         nav {
             position: fixed;
             top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            inset-inline: 0;
             z-index: 1000;
-            padding: 20px 0;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            height: 72px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.4s ease;
         }
 
-        nav .container {
+        nav.scrolled {
+            height: 60px;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-inner {
+            max-width: 1340px;
+            margin: 0 auto;
+            padding: 0 40px;
+            height: 100%;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            gap: 24px;
         }
 
         .logo {
-            font-family: 'Cairo', sans-serif;
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--text-dark);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            text-decoration: none;
         }
 
-        .logo-accent {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary-gold), var(--accent-peach));
-            border-radius: 50%;
+        .logo-mark {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-style: italic;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 900;
+            font-size: 18px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            font-family: 'Cairo', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.1;
+        }
+
+        .logo-text small {
+            display: block;
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--gold);
+            letter-spacing: 0.05em;
+            font-family: 'DM Mono', monospace;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.25s;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+            background: var(--gold-pale);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .nav-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            border: 1px solid var(--border-strong);
+            background: transparent;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .nav-btn:hover {
+            background: var(--gold);
+            border-color: var(--gold);
             color: white;
         }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 40px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            right: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-gold);
-            transition: width 0.3s;
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
+        /* ─── HERO ─── */
         .hero {
-            margin-top: 80px;
             min-height: 100vh;
+            padding-top: 72px;
+            background: var(--hero-bg);
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, #f8f8f8 0%, #fff5e6 100%);
             position: relative;
             overflow: hidden;
         }
@@ -118,814 +204,1982 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -10%;
-            width: 50%;
-            height: 100%;
-            background: radial-gradient(circle, var(--secondary-gold) 1px, transparent 1px);
-            background-size: 30px 30px;
-            opacity: 0.3;
-            animation: float 20s ease-in-out infinite;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 20% 50%, var(--gold-glow) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(201,168,76,0.08) 0%, transparent 40%);
+            pointer-events: none;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+        .hero-grid-lines {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, var(--border) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.4;
+            pointer-events: none;
         }
 
-        .hero-content {
+        .hero-inner {
+            max-width: 1340px;
+            margin: 0 auto;
+            padding: 80px 40px;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 420px;
             gap: 80px;
             align-items: center;
             position: relative;
             z-index: 1;
+            width: 100%;
         }
 
-        .hero-text h1 {
-            font-family: 'Cairo', sans-serif;
-            font-size: 62px;
-            font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, var(--text-dark), #555);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-text h1 .subtitle-en {
-            font-size: 32px;
-            font-weight: 600;
-            display: block;
-            margin-top: 10px;
-            color: #666;
-            -webkit-text-fill-color: #666;
-        }
-
-        .hero-text .subtitle {
-            font-size: 22px;
-            color: #666;
-            margin-bottom: 30px;
-            font-weight: 400;
-            line-height: 1.8;
-        }
-
-        .expertise-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 40px;
-        }
-
-        .tag {
-            padding: 12px 24px;
-            background: white;
-            border: 2px solid var(--primary-gold);
-            border-radius: 30px;
-            font-size: 14px;
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gold-pale);
+            border: 1px solid var(--border-strong);
+            border-radius: 100px;
+            padding: 6px 16px 6px 20px;
+            margin-bottom: 28px;
+            font-size: 13px;
+            font-family: 'DM Mono', monospace;
+            color: var(--gold);
             font-weight: 500;
-            transition: all 0.3s;
+            letter-spacing: 0.03em;
         }
 
-        .tag:hover {
-            background: var(--primary-gold);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(244, 208, 63, 0.3);
+        .hero-eyebrow::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+            animation: pulse 2s ease-in-out infinite;
+            flex-shrink: 0;
         }
 
-        .cta-buttons {
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.7); }
+        }
+
+        .hero-headline {
+            font-family: 'Cairo', sans-serif;
+            font-size: clamp(36px, 4vw, 58px);
+            font-weight: 900;
+            line-height: 1.50;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            letter-spacing: -0.01em;
+        }
+
+        .hero-headline .gold-word {
+            color: var(--gold);
+            position: relative;
+        }
+
+        .hero-headline .gold-word::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            inset-inline: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+            border-radius: 2px;
+        }
+
+        .hero-sub {
+            font-size: 18px;
+            line-height: 1.85;
+            color: var(--text-muted);
+            margin-bottom: 44px;
+            max-width: 560px;
+        }
+
+        .hero-cta {
             display: flex;
-            gap: 20px;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 56px;
         }
 
         .btn {
-            padding: 16px 40px;
-            border: none;
-            border-radius: 30px;
-            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 15px;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
             text-decoration: none;
-            display: inline-block;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Tajawal', sans-serif;
         }
 
         .btn-primary {
-            background: var(--primary-gold);
-            color: var(--text-dark);
-            box-shadow: 0 5px 20px rgba(244, 208, 63, 0.3);
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: #1A1714;
+            box-shadow: 0 4px 20px rgba(201,168,76,0.3);
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(244, 208, 63, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(201,168,76,0.45);
         }
 
         .btn-secondary {
-            background: white;
-            color: var(--text-dark);
-            border: 2px solid var(--text-dark);
+            background: transparent;
+            color: var(--text-primary);
+            border: 1.5px solid var(--border-strong);
         }
 
         .btn-secondary:hover {
-            background: var(--text-dark);
-            color: white;
+            background: var(--gold-pale);
+            border-color: var(--gold);
         }
 
-        .hero-visual {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .stats-grid {
+        .hero-stats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            gap: 16px;
         }
 
         .stat-card {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px 20px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            inset-inline-start: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--gold), transparent);
         }
 
         .stat-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--border-strong);
         }
 
-        .stat-number {
+        .stat-num {
             font-family: 'Cairo', sans-serif;
-            font-size: 48px;
-            font-weight: 700;
-            color: var(--primary-gold);
-            margin-bottom: 10px;
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .stat-unit {
+            font-size: 20px;
         }
 
         .stat-label {
             font-size: 14px;
-            color: #666;
+            color: var(--text-muted);
             font-weight: 500;
+            line-height: 1.4;
         }
 
-        /* About Section */
-        .about {
-            padding: 120px 0;
-            background: white;
+        /* ─── SECTION BASE ─── */
+        section { position: relative; }
+
+        .section-wrap {
+            max-width: 1340px;
+            margin: 0 auto;
+            padding: 0 40px;
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 80px;
+        .section-pad { padding: 100px 0; }
+
+        .section-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 14px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+            display: block;
         }
 
         .section-title {
             font-family: 'Cairo', sans-serif;
-            font-size: 56px;
-            font-weight: 700;
+            font-size: clamp(32px, 3.5vw, 50px);
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.2;
             margin-bottom: 20px;
         }
 
-        .section-subtitle {
-            font-size: 20px;
-            color: #666;
-            max-width: 900px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        .strengths-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .strength-item {
-            background: linear-gradient(135deg, #f8f8f8, #fff5e6);
-            padding: 30px;
-            border-radius: 15px;
-            border-right: 4px solid var(--primary-gold);
-            transition: all 0.3s;
-        }
-
-        .strength-item:hover {
-            transform: translateX(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .strength-item h4 {
+        .section-desc {
             font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-dark);
+            line-height: 1.85;
+            color: var(--text-muted);
+            max-width: 660px;
         }
 
-        /* Portfolio Section */
-        .portfolio {
-            padding: 120px 0;
-            background: linear-gradient(180deg, #f8f8f8 0%, white 100%);
+        /* ─── ABOUT ─── */
+        .about { background: var(--section-alt); }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 500px 1fr;
+            gap: 80px;
+            align-items: start;
         }
 
-        .project-card {
-            background: white;
-            border-radius: 30px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            margin-bottom: 80px;
-            transition: transform 0.3s;
+        .about-left { }
+
+        .about-philosophy {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            margin-top: 40px;
+            position: relative;
         }
 
-        .project-card:hover {
-            transform: translateY(-10px);
+        .about-philosophy::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 80px;
+            color: var(--gold);
+            opacity: 0.3;
+            position: absolute;
+            top: -10px;
+            inset-inline-end: 24px;
+            line-height: 1;
         }
 
-        .project-header {
-            padding: 50px 60px 30px 60px;
-            background: linear-gradient(135deg, #f8f8f8, #fff5e6);
-        }
-
-        .project-header h3 {
-            font-family: 'Cairo', sans-serif;
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-dark);
-        }
-
-        .project-header .project-title-en {
-            font-size: 20px;
-            color: #888;
-            font-weight: 500;
-            margin-bottom: 20px;
+        .about-philosophy p {
+            font-size: 16px;
+            line-height: 1.9;
+            color: var(--text-secondary);
             font-style: italic;
         }
 
-        .project-description {
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .cap-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px 20px;
+            transition: all 0.3s;
+        }
+
+        .cap-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 4px 24px var(--gold-glow);
+            transform: translateY(-2px);
+        }
+
+        .cap-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+            display: block;
+            filter: sepia(1) saturate(3) hue-rotate(5deg) brightness(0.85);
+        }
+
+        .cap-title {
             font-size: 17px;
-            line-height: 1.8;
-            color: #555;
-            margin-bottom: 30px;
-        }
-
-        .project-section {
-            margin-bottom: 25px;
-        }
-
-        .project-section h4 {
-            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--text-dark);
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            line-height: 1.4;
         }
 
-        .project-section ul {
-            list-style: none;
-            padding-right: 0;
-        }
-
-        .project-section li {
-            padding: 10px 0;
-            padding-right: 25px;
-            font-size: 15px;
-            color: #555;
-            position: relative;
+        .cap-desc {
+            font-size: 14px;
+            color: var(--text-muted);
             line-height: 1.6;
         }
 
-        .project-section li::before {
-            content: '◆';
-            position: absolute;
-            right: 0;
-            color: var(--primary-gold);
-            font-weight: 700;
+        /* ─── METHODOLOGY STRIP ─── */
+        .methodology {
+            background: linear-gradient(135deg, var(--ink) 0%, var(--ink-soft) 100%);
+            padding: 80px 0;
+            overflow: hidden;
         }
 
-        .project-tools {
-            background: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            border: 2px solid var(--primary-gold);
-            margin-top: 25px;
+        [data-theme="dark"] .methodology {
+            background: linear-gradient(135deg, #0A0806 0%, #141210 100%);
         }
 
-        .project-tools strong {
-            color: var(--text-dark);
-            font-weight: 700;
+        .method-inner {
+            max-width: 1340px;
+            margin: 0 auto;
+            padding: 0 40px;
         }
 
-        .dashboard-container {
-            padding: 0;
-            background: #f0f0f0;
-            min-height: 600px;
-            position: relative;
-        }
-
-        .dashboard-container iframe {
-            width: 100%;
-            min-height: 600px;
-            height: 600px;
-            border: none;
-            display: block;
-        }
-
-        /* Dashboard Image Styling */
-        .dashboard-image {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: contain;
-            max-height: 800px;
-        }
-
-        .dashboard-image:hover {
-            cursor: pointer;
-            opacity: 0.95;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 120px 0;
-            background: linear-gradient(135deg, var(--dark-bg), #2a2a2a);
-            color: white;
-            text-align: center;
-        }
-
-        .contact .section-title {
-            color: white;
-        }
-
-        .contact .section-subtitle {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
+        .method-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 60px;
-            margin-top: 60px;
+            align-items: end;
+            margin-bottom: 60px;
+        }
+
+        .method-header .section-label { color: var(--gold-light); }
+        .method-header .section-title { color: #FAF8F5; }
+        .method-header .section-desc { color: rgba(250,248,245,0.65); }
+
+        .method-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+        }
+
+        .method-step {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 32px 24px;
+            position: relative;
+            transition: background 0.3s;
+        }
+
+        .method-step:hover { background: rgba(201,168,76,0.08); }
+
+        .method-step:first-child { border-radius: 12px 0 0 12px; }
+        [dir="rtl"] .method-step:first-child { border-radius: 0 12px 12px 0; }
+        .method-step:last-child { border-radius: 0 12px 12px 0; }
+        [dir="rtl"] .method-step:last-child { border-radius: 12px 0 0 12px; }
+
+        .step-num {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .step-icon {
+            font-size: 32px;
+            margin-bottom: 14px;
+            display: block;
+            filter: sepia(1) saturate(3) hue-rotate(5deg) brightness(0.85);
+        }
+
+        .step-name {
+            font-size: 17px;
+            font-weight: 700;
+            color: #FAF8F5;
+            margin-bottom: 8px;
+        }
+
+        .step-detail {
+            font-size: 14px;
+            color: rgba(250,248,245,0.55);
+            line-height: 1.6;
+        }
+
+        /* ─── PORTFOLIO ─── */
+        .portfolio { background: var(--paper); }
+
+        .projects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow);
+        }
+
+        .project-card:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: var(--border-strong);
+            transform: translateY(-4px);
+        }
+
+        .project-top {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .project-info {
+            padding: 48px 48px 48px 48px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
             flex-wrap: wrap;
         }
 
-        .contact-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
+        .project-num {
+            font-family: 'DM Mono', monospace;
+            font-size: 12px;
+            color: var(--gold);
+            letter-spacing: 0.1em;
         }
 
-        .contact-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--primary-gold);
-            border-radius: 50%;
+        .project-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--gold-pale);
+            border: 1px solid var(--border-strong);
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 100px;
+            letter-spacing: 0.04em;
+            font-family: 'DM Mono', monospace;
+        }
+
+        .project-title-ar {
+            font-family: 'Cairo', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .project-title-en {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 0.04em;
+            margin-bottom: 40px;
+        }
+
+        /* ─── PROJECT ACCORDION ─── */
+        .project-accordion { flex: 1; }
+
+        .acc-section {
+            border-top: 1px solid var(--border);
+        }
+
+        .acc-header {
+            width: 100%;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            text-align: start;
+            gap: 12px;
+            color: var(--text-primary);
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .acc-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .acc-icon {
+            font-size: 16px;
+            width: 30px;
+            height: 30px;
+            background: var(--gold-pale);
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            flex-shrink: 0;
+            filter: sepia(1) saturate(3) hue-rotate(5deg) brightness(0.85);
         }
 
-        .contact-item a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            transition: color 0.3s;
+        .acc-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
         }
 
-        .contact-item a:hover {
-            color: var(--primary-gold);
+        .acc-arrow {
+            font-size: 11px;
+            color: var(--text-muted);
+            transition: transform 0.3s;
+            flex-shrink: 0;
         }
 
-        .contact-label {
+        .acc-section.open .acc-arrow { transform: rotate(90deg); }
+
+        .acc-body {
+            display: none;
+            padding-bottom: 16px;
+        }
+
+        .acc-section.open .acc-body { display: block; }
+
+        .acc-body p, .acc-body li {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .acc-body ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .acc-body li {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .acc-body li::before {
+            content: '◆';
+            color: var(--gold);
+            font-size: 8px;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+
+        .insight-item {
+            background: var(--gold-pale);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-bottom: 8px;
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
         }
 
-        /* Footer */
-        footer {
-            background: var(--dark-bg);
-            color: rgba(255, 255, 255, 0.6);
+        .insight-item .i-icon {
+            color: var(--gold);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .kpi-pill {
+            background: var(--paper-mid);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-family: 'DM Mono', monospace;
+        }
+
+        .kpi-pill strong {
+            display: block;
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .tools-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tool-chip {
+            background: var(--paper-mid);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-family: 'DM Mono', monospace;
+            font-weight: 500;
+        }
+
+        .improve-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .improve-item {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .improve-item::before {
+            content: '→';
+            color: var(--gold);
+            flex-shrink: 0;
+            font-family: 'DM Mono', monospace;
+        }
+
+        /* ─── PROJECT IMAGE PANEL ─── */
+        .project-visual {
+            position: relative;
+            background: var(--paper-mid);
+            display: flex;
+            flex-direction: column;
+            min-height: 520px;
+        }
+
+        .project-img-wrap {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+
+        .project-card:hover .project-img-wrap img {
+            transform: scale(1.02);
+        }
+
+        .project-dashboard-link {
+            position: absolute;
+            bottom: 20px;
+            inset-inline-end: 20px;
+            background: var(--gold);
+            color: #1A1714;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 10px 20px;
+            border-radius: 100px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 16px rgba(201,168,76,0.4);
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .project-dashboard-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(201,168,76,0.5);
+        }
+
+        .project-dashboard-link .link-icon { font-size: 16px; }
+
+        .dashboard-placeholder {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                var(--border) 10px,
+                var(--border) 11px
+            );
+            min-height: 400px;
+            padding: 40px;
+        }
+
+        .placeholder-icon {
+            font-size: 48px;
+            opacity: 0.4;
+        }
+
+        .placeholder-text {
+            font-size: 14px;
+            color: var(--text-muted);
             text-align: center;
-            padding: 40px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: 'DM Mono', monospace;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Add dashboard link slot visible at bottom of visual panel */
+        .project-link-bar {
+            padding: 16px 24px;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
         }
 
-        .fade-in {
-            animation: fadeInUp 0.8s ease-out forwards;
+        .link-slot {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--text-muted);
         }
 
-        .delay-1 { animation-delay: 0.1s; opacity: 0; }
-        .delay-2 { animation-delay: 0.2s; opacity: 0; }
-        .delay-3 { animation-delay: 0.3s; opacity: 0; }
-        .delay-4 { animation-delay: 0.4s; opacity: 0; }
+        .link-slot a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
 
-        /* Responsive */
+        .link-slot a:hover { opacity: 0.8; }
+
+        .link-slot .placeholder-link {
+            color: var(--text-muted);
+            font-family: 'DM Mono', monospace;
+            font-size: 12px;
+            background: var(--paper-mid);
+            border: 1px dashed var(--border-strong);
+            border-radius: 6px;
+            padding: 6px 14px;
+        }
+
+        /* ─── DATA SCOPE BAR ─── */
+        .scope-bar {
+            border-top: 1px solid var(--border);
+            padding: 20px 48px;
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            background: var(--paper-warm);
+        }
+
+        .scope-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .scope-key {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .scope-val {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* ─── CONTACT ─── */
+        .contact {
+            background: var(--contact-bg);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.08) 0%, transparent 60%);
+        }
+
+        .contact-inner {
+            max-width: 1340px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .contact-left .section-label { color: var(--gold-light); }
+        .contact-left .section-title { color: #FAF8F5; }
+        .contact-left .section-desc { color: rgba(250,248,245,0.6); }
+
+        .contact-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            background: rgba(201,168,76,0.08);
+            border-color: rgba(201,168,76,0.3);
+            transform: translateX(-4px);
+        }
+
+        [dir="ltr"] .contact-card:hover { transform: translateX(4px); }
+
+        .contact-card-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+            filter: sepia(0.2) saturate(1.2);
+        }
+
+        .contact-card-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.45);
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 0.06em;
+            margin-bottom: 4px;
+        }
+
+        .contact-card-value {
+            font-size: 15px;
+            color: #FAF8F5;
+            font-weight: 600;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: #0A0806;
+            padding: 32px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        footer p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.35);
+            font-family: 'DM Mono', monospace;
+        }
+
+        footer span { color: var(--gold); }
+
+        /* ─── SCROLL REVEAL ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 1100px) {
+            .hero-inner { grid-template-columns: 1fr; }
+            .hero-stats { max-width: 440px; }
+            .about-grid { grid-template-columns: 1fr; }
+            .method-steps { grid-template-columns: repeat(2, 1fr); }
+            .method-header { grid-template-columns: 1fr; gap: 24px; }
+            .project-top { grid-template-columns: 1fr; }
+            .project-visual { min-height: 360px; }
+            .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+        }
+
         @media (max-width: 768px) {
-            .hero-content,
-            .strengths-grid {
-                grid-template-columns: 1fr;
-            }
+            .nav-inner { padding: 0 20px; }
+            .nav-links { display: none; }
+            .section-wrap { padding: 0 20px; }
+            .section-pad { padding: 70px 0; }
+            .hero-inner { padding: 60px 20px; }
+            .hero-stats { grid-template-columns: repeat(2, 1fr); }
+            .method-steps { grid-template-columns: 1fr 1fr; }
+            .capabilities-grid { grid-template-columns: 1fr; }
+            .project-info { padding: 28px 24px; }
+            .scope-bar { padding: 16px 24px; }
+            .kpi-row { grid-template-columns: 1fr; }
+            footer { padding: 24px 20px; }
+        }
 
-            .hero-text h1 {
-                font-size: 40px;
-            }
+        @media (max-width: 480px) {
+            .hero-headline { font-size: 32px; }
+            .method-steps { grid-template-columns: 1fr; }
+            .stat-num { font-size: 34px; }
+        }
 
-            .hero-text h1 .subtitle-en {
-                font-size: 20px;
-            }
-
-            nav ul {
-                display: none;
-            }
-
-            .contact-info {
-                flex-direction: column;
-                gap: 30px;
-            }
-
-            .project-header {
-                padding: 30px 30px 20px 30px;
-            }
-
-            .project-header h3 {
-                font-size: 28px;
-            }
-
-            .dashboard-container iframe {
-                height: 400px;
-            }
+        /* English layout adjustments */
+        html[dir="ltr"] .about-philosophy::before {
+            right: auto;
+            left: 24px;
+        }
+        html[dir="ltr"] .stat-card::before {
+            left: 0;
+            right: auto;
+        }
+        html[dir="ltr"] .hero-headline .gold-word::after {
+            background: linear-gradient(90deg, transparent, var(--gold));
         }
     </style>
 </head>
+
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <div class="logo">
-                <div class="logo-accent">م</div>
-                مي مريكي
-            </div>
-            <ul>
-                <li><a href="#about">النبذة</a></li>
-                <li><a href="#portfolio">المشاريع</a></li>
-                <li><a href="#contact">التواصل</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="fade-in delay-1">
-                        تحليل البيانات<br>وصناعة القرار
-                        <span class="subtitle-en">Data Analytics & Executive Dashboard Portfolio</span>
-                    </h1>
-                    <p class="subtitle fade-in delay-2">
-                        محللة بيانات متخصصة في دعم اتخاذ القرار عبر تحويل البيانات التشغيلية والاستراتيجية إلى رؤى قابلة للتنفيذ
-                    </p>
-                    
-                    <div class="cta-buttons fade-in delay-4">
-                        <a href="#portfolio" class="btn btn-primary">استعراض المشاريع</a>
-                        <a href="#contact" class="btn btn-secondary">تواصل معي</a>
+<!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+<nav id="mainNav">
+    <div class="nav-inner">
+        <a href="#" class="logo">
+            <div class="logo-mark">م</div>
+            <div class="logo-text">
+                <span class="ar">مي مريكي</span>
+                <span class="en">May Mariki</span>
+            </div>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#about"><span class="ar">النبذة</span><span class="en">About</span></a></li>
+            <li><a href="#methodology"><span class="ar">المنهجية</span><span class="en">Methodology</span></a></li>
+            <li><a href="#portfolio"><span class="ar">المشاريع</span><span class="en">Projects</span></a></li>
+            <li><a href="#contact"><span class="ar">التواصل</span><span class="en">Contact</span></a></li>
+        </ul>
+
+        <div class="nav-controls">
+            <button class="nav-btn" id="langToggle" title="Switch Language" onclick="toggleLang()">
+                <span class="ar">EN</span><span class="en">AR</span>
+            </button>
+            <button class="nav-btn" id="themeToggle" title="Toggle Theme" onclick="toggleTheme()">
+                <span id="themeIcon">☾</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section class="hero" id="home">
+    <div class="hero-grid-lines"></div>
+    <div class="hero-inner">
+        <div class="hero-text">
+            <div class="hero-eyebrow reveal">
+                <span class="ar">محللة بيانات، المملكة العربية السعودية</span>
+                <span class="en"> Data Analyst, Saudi Arabia</span>
+            </div>
+
+            <h1 class="hero-headline reveal reveal-delay-1">
+                <span class="ar">تحليل البيانات<br><span class="gold-word">التنفيذي</span><br>وصناعة القرار</span>
+                <span class="en">Executive<br><span class="gold-word">Data Analytics</span><br>& Decision Intelligence</span>
+            </h1>
+
+            <p class="hero-sub reveal reveal-delay-2">
+                <span class="ar">محللة بيانات بخبرة في تصميم لوحات قيادية تنفيذية، بناء نماذج بيانات فعالة، وتحويل البيانات التشغيلية إلى أنظمة دعم قرار قابلة للتنفيذ ومرتبطة بالأهداف الاستراتيجية.</span>
+                <span class="en">Data analyst specializing in executive dashboard design, effective data modeling, and transforming operational data into actionable decision-support systems aligned with strategic objectives.</span>
+            </p>
+
+            <div class="hero-cta reveal reveal-delay-3">
+                <a href="#portfolio" class="btn btn-primary">
+                    <span>📊</span>
+                    <span class="ar">استعراض المشاريع</span>
+                    <span class="en">View Projects</span>
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    <span>📞</span>
+                    <span class="ar">تواصل معي</span>
+                    <span class="en">Get in Touch</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-stats reveal reveal-delay-4">
+            <div class="stat-card">
+                <div class="stat-num">+2</div>
+                <div class="stat-label ar">سنوات خبرة تحليلية</div>
+                <div class="stat-label en">Years Analytical Experience</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">+15</div>
+                <div class="stat-label ar">مؤشر أداء تنفيذي مُصمَّم</div>
+                <div class="stat-label en">Executive KPIs Designed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">5</div>
+                <div class="stat-label ar"> نماذج بيانات </div>
+                <div class="stat-label en">Executive Data Models</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">+200K</div>
+                <div class="stat-label ar">سجل بيانات تمت معالجته</div>
+                <div class="stat-label en">Data Records Processed</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════ ABOUT ═══════════════════════════ -->
+<section class="about section-pad" id="about">
+    <div class="section-wrap">
+        <div class="about-grid">
+            <div class="about-left reveal">
+                <span class="section-label ar">نبذة عني</span>
+                <span class="section-label en">About Me</span>
+                <h2 class="section-title">
+                    <span class="ar">محللة بيانات<br>موجّهة بالأثر</span>
+                    <span class="en">Impact-Driven<br>Data Analyst</span>
+                </h2>
+                <p class="section-desc">
+                    <span class="ar">أمتلك خبرة في تصميم وبناء لوحات معلومات تفاعلية تدعم الإدارة العليا، وتُعزز كفاءة العمليات، وتُمكّن من مراقبة الأداء عبر مؤشرات دقيقة قابلة للقياس. أركز على تبسيط البيانات المعقدة وصياغتها بصريًا بطريقة تسهّل الفهم السريع واتخاذ القرار المبني على الأدلة.</span>
+                    <span class="en">I specialize in designing interactive dashboards that support executive decision-making, enhance operational efficiency, and enable performance monitoring through precise measurable KPIs. I focus on simplifying complex data and presenting it visually for rapid comprehension and evidence-based decisions.</span>
+                </p>
+
+                <div class="about-philosophy">
+                    <p class="ar">لا أبني لوحات معلومات لعرض الأرقام فقط — بل أُصمّم أنظمة دعم قرار تربط المؤشرات بالأهداف التشغيلية والاستراتيجية لضمان وضوح التأثير واتجاه الأداء.</p>
+                    <p class="en">I don't just build dashboards to display numbers — I design decision-support systems that connect KPIs to operational and strategic goals, ensuring clarity of impact and performance direction.</p>
+                </div>
+            </div>
+
+            <div class="capabilities-grid reveal reveal-delay-2">
+                <div class="cap-card">
+                    <span class="cap-icon">🎯</span>
+                    <div class="cap-title ar">تصميم أطر مؤشرات الأداء</div>
+                    <div class="cap-title en">KPI Framework Design</div>
+                    <div class="cap-desc ar">ربط المؤشرات بالأهداف الاستراتيجية المؤسسية</div>
+                    <div class="cap-desc en">Linking indicators to institutional strategic goals</div>
+                </div>
+                <div class="cap-card">
+                    <span class="cap-icon">🗄️</span>
+                    <div class="cap-title ar">نمذجة البيانات Star Schema</div>
+                    <div class="cap-title en">Star Schema Data Modeling</div>
+                    <div class="cap-desc ar">بناء نماذج بيانات لدعم التحليل المتقدم</div>
+                    <div class="cap-desc en">Building data models for advanced analytics</div>
+                </div>
+                <div class="cap-card">
+                    <span class="cap-icon">📊</span>
+                    <div class="cap-title ar">لوحات تنفيذية للإدارة العليا</div>
+                    <div class="cap-title en">Executive Dashboard Design</div>
+                    <div class="cap-desc ar">تطوير لوحات موجّهة لصناع القرار</div>
+                    <div class="cap-desc en">Dashboards tailored for senior management</div>
+                </div>
+                <div class="cap-card">
+                    <span class="cap-icon">💡</span>
+                    <div class="cap-title ar">رؤى لدعم النمو والربحية</div>
+                    <div class="cap-title en">Growth & Profitability Insights</div>
+                    <div class="cap-desc ar">استخراج رؤى تدعم قرارات النمو</div>
+                    <div class="cap-desc en">Insights that drive growth decisions</div>
+                </div>
+                <div class="cap-card">
+                    <span class="cap-icon">🔍</span>
+                    <div class="cap-title ar">تحليل الاتجاهات الزمنية</div>
+                    <div class="cap-title en">Time-Series Trend Analysis</div>
+                    <div class="cap-desc ar">استخراج الأنماط الموسمية والدورية</div>
+                    <div class="cap-desc en">Extracting seasonal and cyclical patterns</div>
+                </div>
+                <div class="cap-card">
+                    <span class="cap-icon">🤝</span>
+                    <div class="cap-title ar">سرد بصري موجّه لأصحاب المصلحة</div>
+                    <div class="cap-title en">Stakeholder Data Storytelling</div>
+                    <div class="cap-desc ar">ربط النتائج بالأهداف المؤسسية</div>
+                    <div class="cap-desc en">Connecting findings to business objectives</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════ METHODOLOGY ═══════════════════════════ -->
+<section class="methodology" id="methodology">
+    <div class="method-inner">
+        <div class="method-header reveal">
+            <div>
+                <span class="section-label ar">كيف أعمل</span>
+                <span class="section-label en">How I Work</span>
+                <h2 class="section-title">
+                    <span class="ar">منهجية التحليل التي أعمل بها</span>
+                    <span class="en">My Analytical Methodology</span>
+                </h2>
+            </div>
+            <p class="section-desc">
+                <span class="ar">نهج منظّم يضمن ربط كل تحليل بقرار أعمال حقيقي قابل للتنفيذ</span>
+                <span class="en">A structured approach ensuring every analysis connects to a real, actionable business decision</span>
+            </p>
+        </div>
+
+        <div class="method-steps reveal reveal-delay-1">
+            <div class="method-step">
+                <span class="step-num">01</span>
+                <span class="step-icon">🏢</span>
+                <div class="step-name ar">فهم السياق</div>
+                <div class="step-name en">Business Context</div>
+                <div class="step-detail ar">تحديد المشكلة التجارية والأهداف قبل لمس البيانات</div>
+                <div class="step-detail en">Define business problem and objectives before touching data</div>
+            </div>
+            <div class="method-step">
+                <span class="step-num">02</span>
+                <span class="step-icon">🧹</span>
+                <div class="step-name ar">تنظيف ونمذجة</div>
+                <div class="step-name en">Clean & Model</div>
+                <div class="step-detail ar">معالجة البيانات وبناء نموذج Star Schema قابل للتوسع</div>
+                <div class="step-detail en">Process data and build scalable Star Schema model</div>
+            </div>
+            <div class="method-step">
+                <span class="step-num">03</span>
+                <span class="step-icon">📐</span>
+                <div class="step-name ar">إطار مؤشرات الاداء</div>
+                <div class="step-name en">KPI Framework</div>
+                <div class="step-detail ar">تصميم مؤشرات DAX مرتبطة بالأهداف الاستراتيجية</div>
+                <div class="step-detail en">Design DAX measures aligned with strategic goals</div>
+            </div>
+            <div class="method-step">
+                <span class="step-num">04</span>
+                <span class="step-icon">🎯</span>
+                <div class="step-name ar">قرارات قابلة للتنفيذ</div>
+                <div class="step-name en">Actionable Decisions</div>
+                <div class="step-detail ar">تحويل الرؤى إلى توصيات محددة وقابلة للتطبيق</div>
+                <div class="step-detail en">Translate insights into specific, applicable recommendations</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════ PORTFOLIO ═══════════════════════════ -->
+<section class="portfolio section-pad" id="portfolio">
+    <div class="section-wrap">
+        <div class="section-header" style="margin-bottom:60px;">
+            <span class="section-label ar reveal">دراسات الحالة التحليلية</span>
+            <span class="section-label en reveal">Analytical Case Studies</span>
+            <h2 class="section-title reveal reveal-delay-1">
+                <span class="ar">المشاريع التحليلية</span>
+                <span class="en">Portfolio Projects</span>
+            </h2>
+            <p class="section-desc reveal reveal-delay-2">
+            </p>
+        </div>
+
+        <div class="projects-list">
+
+            <!-- ══ PROJECT 1: ECOMMERCE ══ -->
+            <div class="project-card reveal">
+                <div class="project-top">
+                    <div class="project-info">
+                        <div class="project-meta">
+                            <span class="project-num">PROJECT / 01</span>
+                            <span class="project-badge">⚡ Power BI</span>
+                        </div>
+                        <h3 class="project-title-ar ar">لوحة تحكم مبيعات التجارة الإلكترونية</h3>
+                        <h3 class="project-title-ar en">E-Commerce Sales Dashboard</h3>
+                        <p class="project-title-en">ECOMMERCE SALES PERFORMANCE ANALYSIS</p>
+
+                        <div class="project-accordion">
+
+                            <div class="acc-section open">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">🏢</div>
+                                        <span class="acc-title ar">السياق التجاري</span>
+                                        <span class="acc-title en">Business Context</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <p class="ar">شركة تجارة إلكترونية متعددة الفئات تسعى لفهم أداء المبيعات والربحية عبر الأرباع السنوية، وتحليل سلوك العملاء وقنوات الدفع لتحديد فرص النمو وتحسين الهوامش الربحية.</p>
+                                    <p class="en">A multi-category e-commerce company seeking to understand sales and profitability performance across quarters, analyze customer behavior and payment channels to identify growth opportunities and improve profit margins.</p>
+                                </div>
+                            </div>
+
+                            <div class="acc-section">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">❗</div>
+                                        <span class="acc-title ar">المشكلة والهدف</span>
+                                        <span class="acc-title en">Problem & Objective</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <ul>
+                                        <li><span class="ar">تفاوت في الربحية بين الفئات دون رؤية واضحة</span><span class="en">Profitability variation across categories without clear visibility</span></li>
+                                        <li><span class="ar">غياب رؤية شهرية واضحة لاتجاهات الربح</span><span class="en">Lack of clear monthly view of profit trends</span></li>
+                                        <li><span class="ar">عدم تحديد الفئات والعملاء الأعلى قيمة</span><span class="en">Top-value categories and customers not identified</span></li>
+                                        <li><span class="ar">غموض تأثير طرق الدفع على حجم المبيعات</span><span class="en">Unclear impact of payment methods on sales volume</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="acc-section">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">📐</div>
+                                        <span class="acc-title ar">إطار المؤشرات KPI</span>
+                                        <span class="acc-title en">KPI Framework</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <div class="kpi-row">
+                                        <div class="kpi-pill"><strong>DAX</strong>Total Profit</div>
+                                        <div class="kpi-pill"><strong>DAX</strong>AOV (Avg Order Value)</div>
+                                        <div class="kpi-pill"><strong>DAX</strong>Monthly Profit Trend</div>
+                                        <div class="kpi-pill"><strong>DAX</strong>Profit by Category</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="acc-section">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">💡</div>
+                                        <span class="acc-title ar">الرؤى الرئيسية</span>
+                                        <span class="acc-title en">Key Insights</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <div class="insight-item"><span class="i-icon">📍</span><span class="ar">فئة Clothing تمثل 63% من الكمية لكنها ليست الأعلى ربحية</span><span class="en">Clothing category represents 63% of quantity but isn't the most profitable</span></div>
+                                    <div class="insight-item"><span class="i-icon">📍</span><span class="ar">فئة Printers حققت أعلى ربح رغم حجم مبيعات أقل</span><span class="en">Printers category achieved highest profit despite lower sales volume</span></div>
+                                    <div class="insight-item"><span class="i-icon">📍</span><span class="ar">طريقة الدفع COD تمثل 44% مما يعكس اعتماداً مرتفعاً على الدفع عند الاستلام</span><span class="en">COD represents 44% reflecting high dependence on cash-on-delivery</span></div>
+                                    <div class="insight-item"><span class="i-icon">📍</span><span class="ar">انخفاض في الربحية خلال يونيو-يوليو يشير إلى موسمية سلبية</span><span class="en">Profitability dip in June-July indicates negative seasonality</span></div>
+                                    <div class="insight-item"><span class="i-icon">📍</span><span class="ar">3 عملاء فقط يمثلون نسبة كبيرة من الإيرادات (Concentration Risk)</span><span class="en">3 customers represent a large share of revenue (Concentration Risk)</span></div>
+                                </div>
+                            </div>
+
+                            <div class="acc-section">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">🚀</div>
+                                        <span class="acc-title ar">الأثر التجاري</span>
+                                        <span class="acc-title en">Business Impact</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <ul>
+                                        <li><span class="ar">إعادة توجيه الحملات نحو الفئات الأعلى هامشاً</span><span class="en">Redirect campaigns toward highest-margin categories</span></li>
+                                        <li><span class="ar">تحسين استراتيجيات الدفع وتقليل الاعتماد على COD</span><span class="en">Improve payment strategies and reduce COD dependence</span></li>
+                                        <li><span class="ar">التخطيط للمواسم منخفضة الأداء</span><span class="en">Plan for low-performance seasons</span></li>
+                                        <li><span class="ar">تصميم برامج ولاء للعملاء الأعلى قيمة</span><span class="en">Design loyalty programs for highest-value customers</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="acc-section">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">🔧</div>
+                                        <span class="acc-title ar">الأدوات والتقنيات</span>
+                                        <span class="acc-title en">Tools & Tech Stack</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <div class="tools-chips">
+                                        <span class="tool-chip">Power BI</span>
+                                        <span class="tool-chip">DAX</span>
+                                        <span class="tool-chip">Star Schema</span>
+                                        <span class="tool-chip">KPI Design</span>
+                                        <span class="tool-chip">Trend Analysis</span>
+                                        <span class="tool-chip">Customer Segmentation</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="project-visual">
+                        <div class="project-img-wrap">
+                            <img src="project1-ecommerce.png" alt="E-Commerce Sales Dashboard" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="dashboard-placeholder" style="display:none;">
+                                <span class="placeholder-icon">📊</span>
+                                <span class="placeholder-text">project1-ecommerce.png</span>
+                            </div>
+                        </div>
+                        <div class="project-link-bar">
+                            <div class="link-slot">
+                                <span>🔗</span>
+                                <!-- ADD YOUR DASHBOARD LINK HERE -->
+                                <span class="placeholder-link ar">←https://app.powerbi.com/groups/me/reports/f676de54-8d32-43c7-8ba1-7b7b96761956?ctid=96d258df-1d6e-44ef-9fc7-229389309223&pbi_source=linkShare</span>
+                                <span class="placeholder-link en">← https://app.powerbi.com/groups/me/reports/f676de54-8d32-43c7-8ba1-7b7b96761956?ctid=96d258df-1d6e-44ef-9fc7-229389309223&pbi_source=linkShare</span>
+                                <!-- Example: <a href="YOUR_LINK" target="_blank">View Live Dashboard ↗</a> -->
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="hero-visual fade-in delay-4">
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-number">5</div>
-                            <div class="stat-label">مشاريع تحليلية</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">100%</div>
-                            <div class="stat-label">التزام بالتميز</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">Power BI</div>
-                            <div class="stat-label">الأداة الأساسية</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">KPIs</div>
-                            <div class="stat-label">مؤشرات أداء دقيقة</div>
-                        </div>
+                <div class="scope-bar">
+                    <div class="scope-item">
+                        <span class="scope-key ar">فترة البيانات</span>
+                        <span class="scope-key en">Data Period</span>
+                        <span class="scope-val ar">سنة كاملة</span>
+                        <span class="scope-val en">Full Year</span>
+                    </div>
+                    <div class="scope-item">
+                        <span class="scope-key ar">المتغيرات الرئيسية</span>
+                        <span class="scope-key en">Key Variables</span>
+                        <span class="scope-val">Category · State · Customer · Payment Mode · Profit</span>
+                    </div>
+                    <div class="scope-item">
+                        <span class="scope-key ar">مجال التحليل</span>
+                        <span class="scope-key en">Analysis Domain</span>
+                        <span class="scope-val ar">مبيعات / ربحية / سلوك عملاء</span>
+                        <span class="scope-val en">Sales / Profitability / Customer Behavior</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">النبذة التعريفية</h2>
-                <p class="section-subtitle">
-                    أمتلك خبرة في تصميم وبناء لوحات معلومات تفاعلية تدعم الإدارة العليا، وتُعزز كفاءة العمليات، وتُمكّن من مراقبة الأداء عبر مؤشرات دقيقة قابلة للقياس. أركز على تبسيط البيانات المعقدة وصياغتها بصريًا بطريقة تسهّل الفهم السريع واتخاذ القرار المبني على الأدلة.
+            <!-- ══ PROJECT 2: COURSE SALES ══ -->
+            <div class="project-card reveal">
+                <div class="project-top">
+                    <div class="project-info">
+                        <div class="project-meta">
+                            <span class="project-num">PROJECT / 02</span>
+                            <span class="project-badge">📈 Power BI</span>
+                        </div>
+                        <h3 class="project-title-ar ar">مؤشرات أداء مبيعات الدورات 2024</h3>
+                        <h3 class="project-title-ar en">Course Sales Performance Dashboard 2024</h3>
+                        <p class="project-title-en">COURSE SALES KPI ANALYSIS</p>
+
+                        <div class="project-accordion">
+                            <div class="acc-section open">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">🏢</div>
+                                        <span class="acc-title ar">السياق التجاري</span>
+                                        <span class="acc-title en">Business Context</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <p class="ar">منصة تعليمية تسعى لتحليل أداء مبيعات دوراتها خلال عام 2024، وفهم مساهمة كل نوع دورة في الإيرادات الإجمالية لدعم قرارات التوسع والتسعير.</p>
+                                    <p class="en">An educational platform seeking to analyze its course sales performance throughout 2024 and understand each course type's contribution to total revenue to support expansion and pricing decisions.</p>
+                                </div>
+                            </div>
+
+                            <div class="acc-section">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">❗</div>
+                                        <span class="acc-title ar">المشكلة والهدف</span>
+                                        <span class="acc-title en">Problem & Objective</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <ul>
+                                        <li><span class="ar">غياب رؤية واضحة للأداء الربعي ومقارنة النمو</span><span class="en">Lack of clear quarterly performance and growth comparison</span></li>
+                                        <li><span class="ar">عدم تحديد الدورات الأعلى مبيعاً لدعم قرارات التوسع</span><span class="en">Top-selling courses not identified to support expansion</span></li>
+                                        <li><span class="ar">غياب مؤشر شهري لقياس نمو واستقرار الإيرادات</span><span class="en">No monthly indicator to measure revenue growth and stability</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="acc-section">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">📐</div>
+                                        <span class="acc-title ar">إطار المؤشرات</span>
+                                        <span class="acc-title en">KPI Framework</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <div class="kpi-row">
+                                        <div class="kpi-pill"><strong>KPI</strong><span class="ar">إجمالي الإيرادات</span><span class="en">Total Revenue</span></div>
+                                        <div class="kpi-pill"><strong>KPI</strong><span class="ar">متوسط الإيراد</span><span class="en">Avg Revenue</span></div>
+                                        <div class="kpi-pill"><strong>KPI</strong><span class="ar">عدد الدورات المباعة</span><span class="en">Courses Sold</span></div>
+                                        <div class="kpi-pill"><strong>KPI</strong><span class="ar">نمو ربعي</span><span class="en">QoQ Growth</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="acc-section">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">💡</div>
+                                        <span class="acc-title ar">الرؤى الرئيسية</span>
+                                        <span class="acc-title en">Key Insights</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <div class="insight-item"><span class="i-icon">📍</span><span class="ar">تحديد الدورات الأعلى طلباً للتوسع والتسعير الاستراتيجي</span><span class="en">Identified highest-demand courses for strategic expansion and pricing</span></div>
+                                    <div class="insight-item"><span class="i-icon">📍</span><span class="ar">تحليل مساهمة كل نوع دورة في إجمالي الإيرادات</span><span class="en">Analyzed each course type's contribution to total revenue</span></div>
+                                    <div class="insight-item"><span class="i-icon">📍</span><span class="ar">قياس استقرار الإيرادات عبر المؤشر الشهري</span><span class="en">Measured revenue stability through monthly indicators</span></div>
+                                </div>
+                            </div>
+
+                            <div class="acc-section">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">🔧</div>
+                                        <span class="acc-title ar">الأدوات</span>
+                                        <span class="acc-title en">Tools</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <div class="tools-chips">
+                                        <span class="tool-chip">Power BI</span>
+                                        <span class="tool-chip">KPI Design</span>
+                                        <span class="tool-chip">Trend Analysis</span>
+                                        <span class="tool-chip">Revenue Analytics</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-visual">
+                        <div class="project-img-wrap">
+                            <img src="project2-courses.png" alt="Course Sales Dashboard" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="dashboard-placeholder" style="display:none;">
+                                <span class="placeholder-icon">📈</span>
+                                <span class="placeholder-text">project2-courses.png</span>
+                            </div>
+                        </div>
+                        <div class="project-link-bar">
+                            <div class="link-slot">
+                                <span>🔗</span>
+                                <span class="placeholder-link ar">←https://app.powerbi.com/groups/me/reports/7d117a06-6bbb-40a2-82d4-164f0d92910d?ctid=96d258df-1d6e-44ef-9fc7-229389309223&pbi_source=linkShare</span>
+                                <span class="placeholder-link en">←https://app.powerbi.com/groups/me/reports/7d117a06-6bbb-40a2-82d4-164f0d92910d?ctid=96d258df-1d6e-44ef-9fc7-229389309223&pbi_source=linkShare</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scope-bar">
+                    <div class="scope-item">
+                        <span class="scope-key ar">فترة البيانات</span><span class="scope-key en">Period</span>
+                        <span class="scope-val">2024 (Q1–Q4)</span>
+                    </div>
+                    <div class="scope-item">
+                        <span class="scope-key ar">المتغيرات</span><span class="scope-key en">Variables</span>
+                        <span class="scope-val">Course Type · Revenue · Payment · Quarters</span>
+                    </div>
+                    <div class="scope-item">
+                        <span class="scope-key ar">المجال</span><span class="scope-key en">Domain</span>
+                        <span class="scope-val ar">تعليم / إيرادات</span><span class="scope-val en">Education / Revenue</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══ PROJECT 3: STAFF ══ -->
+            <div class="project-card reveal">
+                <div class="project-top">
+                    <div class="project-info">
+                        <div class="project-meta">
+                            <span class="project-num">PROJECT / 03</span>
+                            <span class="project-badge">👥 Power BI</span>
+                        </div>
+                        <h3 class="project-title-ar ar">تقرير تحليل بيانات الموظفين</h3>
+                        <h3 class="project-title-ar en">Staff Data Analysis Report</h3>
+                        <p class="project-title-en">HR WORKFORCE ANALYTICS</p>
+
+                        <div class="project-accordion">
+                            <div class="acc-section open">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">🏢</div>
+                                        <span class="acc-title ar">السياق التجاري</span>
+                                        <span class="acc-title en">Business Context</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <p class="ar">منظمة تسعى لفهم هيكلها الوظيفي والتوزيع الديموغرافي للموظفين وتحليل الرواتب لدعم قرارات إدارة الموارد البشرية وضمان المساواة والكفاءة التشغيلية.</p>
+                                    <p class="en">An organization seeking to understand its workforce structure, employee demographics, and salary analysis to support HR decisions, ensure equity, and improve operational efficiency.</p>
+                                </div>
+                            </div>
+
+                            <div class="acc-section">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">💡</div>
+                                        <span class="acc-title ar">الرؤى الرئيسية</span>
+                                        <span class="acc-title en">Key Insights</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <div class="insight-item"><span class="i-icon">📍</span><span class="ar">تحليل الفروقات في الرواتب بين الأقسام للكشف عن التفاوتات</span><span class="en">Salary gap analysis across departments to reveal inequities</span></div>
+                                    <div class="insight-item"><span class="i-icon">📍</span><span class="ar">فهم التركيبة الديموغرافية الكاملة للقوى العاملة</span><span class="en">Complete understanding of workforce demographics</span></div>
+                                    <div class="insight-item"><span class="i-icon">📍</span><span class="ar">العلاقة بين العمر والحالة الاجتماعية وتأثيرها التشغيلي</span><span class="en">Relationship between age, marital status, and operational impact</span></div>
+                                </div>
+                            </div>
+
+                            <div class="acc-section">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">📐</div>
+                                        <span class="acc-title ar">إطار المؤشرات</span>
+                                        <span class="acc-title en">KPI Framework</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <div class="kpi-row">
+                                        <div class="kpi-pill"><strong>KPI</strong><span class="ar">إجمالي الموظفين</span><span class="en">Total Employees</span></div>
+                                        <div class="kpi-pill"><strong>KPI</strong><span class="ar">متوسط الرواتب</span><span class="en">Avg Salary</span></div>
+                                        <div class="kpi-pill"><strong>KPI</strong><span class="ar">توزيع الأقسام</span><span class="en">Dept Distribution</span></div>
+                                        <div class="kpi-pill"><strong>KPI</strong><span class="ar">توزيع الجنس</span><span class="en">Gender Split</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="acc-section">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">🔧</div>
+                                        <span class="acc-title ar">الأدوات</span>
+                                        <span class="acc-title en">Tools</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <div class="tools-chips">
+                                        <span class="tool-chip">Power BI</span>
+                                        <span class="tool-chip">Descriptive Analysis</span>
+                                        <span class="tool-chip">HR Analytics</span>
+                                        <span class="tool-chip">Data Categorization</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-visual">
+                        <div class="project-img-wrap">
+                            <img src="project3-staff.png" alt="Staff Report" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="dashboard-placeholder" style="display:none;">
+                                <span class="placeholder-icon">👥</span>
+                                <span class="placeholder-text">project3-staff.png</span>
+                            </div>
+                        </div>
+                        <div class="project-link-bar">
+                            <div class="link-slot">
+                                <span>🔗</span>
+                                <span class="placeholder-link ar">←https://app.powerbi.com/groups/me/reports/8136e9fa-f658-489b-923e-c486b8d8c92e?ctid=96d258df-1d6e-44ef-9fc7-229389309223&pbi_source=linkShare</span>
+                                <span class="placeholder-link en">←https://app.powerbi.com/groups/me/reports/8136e9fa-f658-489b-923e-c486b8d8c92e?ctid=96d258df-1d6e-44ef-9fc7-229389309223&pbi_source=linkShare</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scope-bar">
+                    <div class="scope-item">
+                        <span class="scope-key ar">المتغيرات</span><span class="scope-key en">Variables</span>
+                        <span class="scope-val">Dept · City · Gender · Salary · Age</span>
+                    </div>
+                    <div class="scope-item">
+                        <span class="scope-key ar">المجال</span><span class="scope-key en">Domain</span>
+                        <span class="scope-val ar">موارد بشرية / تحليل وصفي</span><span class="scope-val en">HR / Descriptive Analytics</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══ PROJECT 4: HAJJ ══ -->
+            <div class="project-card reveal">
+                <div class="project-top">
+                    <div class="project-info">
+                        <div class="project-meta">
+                            <span class="project-num">PROJECT / 04</span>
+                            <span class="project-badge">🕌 Power BI</span>
+                        </div>
+                        <h3 class="project-title-ar ar">لوحة مؤشرات تدفق وتوزيع الحجاج</h3>
+                        <h3 class="project-title-ar en">Pilgrim Flow & Distribution Dashboard</h3>
+                        <p class="project-title-en">PILGRIM FLOW AND DISTRIBUTION ANALYSIS</p>
+
+                        <div class="project-accordion">
+                            <div class="acc-section open">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">🏢</div>
+                                        <span class="acc-title ar">السياق التجاري</span>
+                                        <span class="acc-title en">Business Context</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <p class="ar">جهة حكومية تسعى لتحليل بيانات أعداد الحجاج عبر السنوات لدعم التخطيط اللوجستي وإدارة الحشود، وقياس أثر مبادرات تسهيل الإجراءات مثل "طريق مكة".</p>
+                                    <p class="en">A government entity analyzing pilgrim data across years to support logistics planning and crowd management, measuring the impact of facilitation initiatives such as "Makkah Route."</p>
+                                </div>
+                            </div>
+
+                            <div class="acc-section">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">💡</div>
+                                        <span class="acc-title ar">الرؤى الرئيسية</span>
+                                        <span class="acc-title en">Key Insights</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <div class="insight-item"><span class="i-icon">📍</span><span class="ar">رصد التغير السنوي في أعداد الحجاج داخلياً ودولياً</span><span class="en">Tracking annual change in domestic and international pilgrim numbers</span></div>
+                                    <div class="insight-item"><span class="i-icon">📍</span><span class="ar">تحليل توزيع الحجاج جغرافياً وديموغرافياً بالجنس</span><span class="en">Geographic and demographic distribution by gender</span></div>
+                                    <div class="insight-item"><span class="i-icon">📍</span><span class="ar">تقييم أثر مبادرة "طريق مكة" حسب الدولة والسنة</span><span class="en">Evaluating "Makkah Route" initiative impact by country and year</span></div>
+                                </div>
+                            </div>
+
+                            <div class="acc-section">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">🚀</div>
+                                        <span class="acc-title ar">الأثر التشغيلي</span>
+                                        <span class="acc-title en">Operational Impact</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <ul>
+                                        <li><span class="ar">دعم التخطيط اللوجستي وإدارة الحشود</span><span class="en">Support logistics planning and crowd management</span></li>
+                                        <li><span class="ar">تحسين تخصيص الموارد الخدمية</span><span class="en">Improve service resource allocation</span></li>
+                                        <li><span class="ar">تقييم فاعلية المبادرات الحكومية</span><span class="en">Evaluate government initiative effectiveness</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="acc-section">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">🔧</div>
+                                        <span class="acc-title ar">الأدوات</span>
+                                        <span class="acc-title en">Tools</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <div class="tools-chips">
+                                        <span class="tool-chip">Power BI</span>
+                                        <span class="tool-chip">Trend Analysis</span>
+                                        <span class="tool-chip">Time Comparison</span>
+                                        <span class="tool-chip">Geo Analytics</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-visual">
+                        <div class="project-img-wrap">
+                            <img src="project4-hajj.png" alt="Pilgrim Dashboard" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="dashboard-placeholder" style="display:none;">
+                                <span class="placeholder-icon">🕌</span>
+                                <span class="placeholder-text">project4-hajj.png</span>
+                            </div>
+                        </div>
+                        <div class="project-link-bar">
+                            <div class="link-slot">
+                                <span>🔗</span>
+                                <span class="placeholder-link ar">← https://app.powerbi.com/groups/me/reports/e1f3eeb8-312b-40d6-bb75-98616c223b85?ctid=96d258df-1d6e-44ef-9fc7-229389309223&pbi_source=linkShare</span>
+                                <span class="placeholder-link en">← https://app.powerbi.com/groups/me/reports/e1f3eeb8-312b-40d6-bb75-98616c223b85?ctid=96d258df-1d6e-44ef-9fc7-229389309223&pbi_source=linkShare</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scope-bar">
+                    <div class="scope-item">
+                        <span class="scope-key ar">المتغيرات</span><span class="scope-key en">Variables</span>
+                        <span class="scope-val">Country · Year · Gender · Category · Initiative</span>
+                    </div>
+                    <div class="scope-item">
+                        <span class="scope-key ar">المجال</span><span class="scope-key en">Domain</span>
+                        <span class="scope-val ar">حكومي / تشغيلي</span><span class="scope-val en">Government / Operational</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══ PROJECT 5: DIET COST ══ -->
+            <div class="project-card reveal">
+                <div class="project-top">
+                    <div class="project-info">
+                        <div class="project-meta">
+                            <span class="project-num">PROJECT / 05</span>
+                            <span class="project-badge">🌍 Power BI</span>
+                        </div>
+                        <h3 class="project-title-ar ar">تقرير التكلفة العالمية للنظام الغذائي الصحي</h3>
+                        <h3 class="project-title-ar en">Global Cost of a Healthy Diet Report</h3>
+                        <p class="project-title-en">GLOBAL FOOD COST & NUTRITION SECURITY ANALYSIS</p>
+
+                        <div class="project-accordion">
+                            <div class="acc-section open">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">🏢</div>
+                                        <span class="acc-title ar">السياق التجاري</span>
+                                        <span class="acc-title en">Business Context</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <p class="ar">دراسة دولية تهدف لتحليل وفهم التفاوت في تكلفة النظام الغذائي الصحي عبر الدول والمناطق الجغرافية لدعم أبحاث الأمن الغذائي وسياسات التنمية المستدامة.</p>
+                                    <p class="en">An international study aiming to analyze and understand the disparity in healthy diet costs across countries and regions to support food security research and sustainable development policies.</p>
+                                </div>
+                            </div>
+
+                            <div class="acc-section">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">💡</div>
+                                        <span class="acc-title ar">الرؤى الرئيسية</span>
+                                        <span class="acc-title en">Key Insights</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <div class="insight-item"><span class="i-icon">📍</span><span class="ar">مقارنة التفاوت الاقتصادي في تكلفة الغذاء بين دول العالم</span><span class="en">Comparing economic food cost disparity across countries</span></div>
+                                    <div class="insight-item"><span class="i-icon">📍</span><span class="ar">تحليل الاتجاهات الزمنية لتكلفة الغذاء الصحي عبر السنوات</span><span class="en">Time-series analysis of healthy food cost trends</span></div>
+                                    <div class="insight-item"><span class="i-icon">📍</span><span class="ar">تحديد المناطق الأعلى عبئاً من حيث التكلفة (مرتفع / متوسط)</span><span class="en">Identifying highest-cost burden regions (high/medium classification)</span></div>
+                                </div>
+                            </div>
+
+                            <div class="acc-section">
+                                <button class="acc-header" onclick="toggleAcc(this)">
+                                    <div class="acc-header-left">
+                                        <div class="acc-icon">🔧</div>
+                                        <span class="acc-title ar">الأدوات</span>
+                                        <span class="acc-title en">Tools</span>
+                                    </div>
+                                    <span class="acc-arrow">▶</span>
+                                </button>
+                                <div class="acc-body">
+                                    <div class="tools-chips">
+                                        <span class="tool-chip">Power BI</span>
+                                        <span class="tool-chip">International Data Analysis</span>
+                                        <span class="tool-chip">Comparative Visualization</span>
+                                        <span class="tool-chip">PPP Analysis</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-visual">
+                        <div class="project-img-wrap">
+                            <img src="project5-diet.png" alt="Global Diet Cost Report" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="dashboard-placeholder" style="display:none;">
+                                <span class="placeholder-icon">🌍</span>
+                                <span class="placeholder-text">project5-diet.png</span>
+                            </div>
+                        </div>
+                        <div class="project-link-bar">
+                            <div class="link-slot">
+                                <span>🔗</span>
+                                <span class="placeholder-link ar">← https://app.powerbi.com/groups/me/reports/32faf097-1b4d-4309-bc68-245a777cce5b?ctid=96d258df-1d6e-44ef-9fc7-229389309223&pbi_source=linkShare</span>
+                                <span class="placeholder-link en">← https://app.powerbi.com/groups/me/reports/32faf097-1b4d-4309-bc68-245a777cce5b?ctid=96d258df-1d6e-44ef-9fc7-229389309223&pbi_source=linkShare</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scope-bar">
+                    <div class="scope-item">
+                        <span class="scope-key ar">التغطية</span><span class="scope-key en">Coverage</span>
+                        <span class="scope-val ar">دول متعددة / سنوات متعددة</span><span class="scope-val en">Multi-country / Multi-year</span>
+                    </div>
+                    <div class="scope-item">
+                        <span class="scope-key ar">المتغيرات</span><span class="scope-key en">Variables</span>
+                        <span class="scope-val">Cost (PPP & USD) · Region · Country · Year</span>
+                    </div>
+                    <div class="scope-item">
+                        <span class="scope-key ar">المجال</span><span class="scope-key en">Domain</span>
+                        <span class="scope-val ar">أمن غذائي / تنمية دولية</span><span class="scope-val en">Food Security / Int'l Development</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════ CONTACT ═══════════════════════════ -->
+<section class="contact" id="contact">
+    <div class="contact-inner">
+        <div class="contact-grid">
+            <div class="contact-left reveal">
+                <span class="section-label ar">لنتحدث</span>
+                <span class="section-label en">Let's Talk</span>
+                <h2 class="section-title">
+                    <span class="ar">هل لديك مشروع<br>بيانات يحتاج رؤية؟</span>
+                    <span class="en">Have a data project<br>that needs vision?</span>
+                </h2>
+                <p class="section-desc" style="margin-top:20px;">
+                    <span class="ar">أرحب دائماً بفرص التعاون والمشاريع الجديدة في مجال تحليل البيانات، لوحات قيادية، ودعم اتخاذ القرار.</span>
+                    <span class="en">I always welcome collaboration opportunities and new projects in data analytics, executive dashboards, and decision support.</span>
                 </p>
             </div>
 
-            <h3 style="text-align: center; font-size: 32px; margin-bottom: 50px; font-family: 'Cairo', sans-serif;">نقاط القوة الأساسية</h3>
+            <div class="contact-cards reveal reveal-delay-2">
+                <a href="/cdn-cgi/l/email-protection#234e425a4e42514a484a0d1163444e424a4f0d404c4e" class="contact-card">
+                    <div class="contact-card-icon">📧</div>
+                    <div>
+                        <div class="contact-card-label ar">البريد الإلكتروني</div>
+                        <div class="contact-card-label en">Email</div>
+                        <div class="contact-card-value"><span class="__cf_email__" data-cfemail="3855594155594a515351160a785f55595154165b5755">[email&#160;protected]</span></div>
+                    </div>
+                </a>
 
-            <div class="strengths-grid">
-                <div class="strength-item">
-                    <h4>تحليل البيانات التشغيلية والاستراتيجية</h4>
-                </div>
-                <div class="strength-item">
-                    <h4>تصميم لوحات المؤشرات التنفيذية (Power BI / Looker Studio)</h4>
-                </div>
-                <div class="strength-item">
-                    <h4>بناء ومتابعة مؤشرات الأداء الرئيسية (KPIs)</h4>
-                </div>
-                <div class="strength-item">
-                    <h4>تحليل الاتجاهات الزمنية واستخراج الأنماط</h4>
-                </div>
-                <div class="strength-item">
-                    <h4>سرد البيانات بصريًا لدعم صناع القرار</h4>
-                </div>
-                <div class="strength-item">
-                    <h4>تحليل موجّه لأصحاب المصلحة وربط النتائج بالأهداف المؤسسية</h4>
-                </div>
+                <a href="tel:+966509438812" class="contact-card">
+                    <div class="contact-card-icon">📱</div>
+                    <div>
+                        <div class="contact-card-label ar">الهاتف</div>
+                        <div class="contact-card-label en">Phone</div>
+                        <div class="contact-card-value" dir="ltr">+966 509 438 812</div>
+                    </div>
+                </a>
+
+                <a href="http://www.linkedin.com/in/may-mariki-612310221" target="_blank" rel="noopener" class="contact-card">
+                    <div class="contact-card-icon">💼</div>
+                    <div>
+                        <div class="contact-card-label">LinkedIn</div>
+                        <div class="contact-card-value">May Mariki</div>
+                    </div>
+                </a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Portfolio Section -->
-    <section class="portfolio" id="portfolio">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">المشاريع التحليلية</h2>
-                <p class="section-subtitle">
-                    مجموعة من المشاريع التحليلية التي تعكس القدرة على تحويل البيانات إلى رؤى قابلة للتنفيذ
-                </p>
-            </div>
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer>
+    <p>
+        © 2025 <span class="ar">مي مريكي</span><span class="en">May Mariki</span>
+        &nbsp;·&nbsp;
+        <span class="ar">محللة بيانات تنفيذية</span><span class="en">Executive Data Analyst</span>
+        &nbsp;·&nbsp;
+        <span style="color:var(--gold)">DATA ANALYST PORTFOLIO</span>
+    </p>
+</footer>
 
-            <!-- Project 1: E-commerce Sales Dashboard -->
-            <div class="project-card">
-                <div class="project-header">
-                    <h3>لوحة تحكم مبيعات التجارة الإلكترونية</h3>
-                    <div class="project-title-en">ECOMMERCE SALES DASHBOARD</div>
-                    <p class="project-description">
-                        مشروع تحليلي يهدف إلى قياس أداء متجر إلكتروني عبر تحليل المبيعات، الأرباح، وسلوك العملاء خلال الأرباع السنوية.
-                    </p>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ─── THEME ───
+function toggleTheme() {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    document.getElementById('themeIcon').textContent = isDark ? '☾' : '☀';
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+}
 
-                    <div class="project-section">
-                        <h4>وصف المشروع</h4>
-                        <p style="color: #555; line-height: 1.8; font-size: 15px;">
-                            تم بناء لوحة تفاعلية لعرض الأداء الربعي (Q1–Q4) مع تحليل إجمالي الإيرادات، الأرباح، متوسط قيمة الطلب (AOV)، والكميات المباعة. تضمنت اللوحة تحليلاً لتوزيع المبيعات حسب الفئات، طرق الدفع، الولايات، وأسماء العملاء، بالإضافة إلى تتبع الاتجاه الشهري للأرباح لاكتشاف الأنماط الموسمية.
-                        </p>
-                    </div>
+// ─── LANGUAGE ───
+function toggleLang() {
+    const html = document.documentElement;
+    const isAr = html.getAttribute('data-lang') === 'ar';
+    const newLang = isAr ? 'en' : 'ar';
+    const newDir = isAr ? 'ltr' : 'rtl';
+    html.setAttribute('data-lang', newLang);
+    html.setAttribute('lang', newLang);
+    html.setAttribute('dir', newDir);
+    localStorage.setItem('lang', newLang);
 
-                    <div class="project-section">
-                        <h4>القيمة التحليلية</h4>
-                        <ul>
-                            <li>تحديد أكثر الفئات والمنتجات ربحية</li>
-                            <li>تحليل أداء قنوات الدفع وتأثيرها على حجم المبيعات</li>
-                            <li>اكتشاف التقلبات الشهرية في الأرباح لدعم قرارات التسويق</li>
-                            <li>مقارنة الأداء بين الأرباع لتقييم النمو السنوي</li>
-                        </ul>
-                    </div>
+    // Show/hide elements
+    document.querySelectorAll('.ar').forEach(el => {
+        el.style.display = newLang === 'ar' ? '' : 'none';
+    });
+    document.querySelectorAll('.en').forEach(el => {
+        el.style.display = newLang === 'en' ? '' : 'none';
+    });
+}
 
-                    <div class="project-tools">
-                        <strong>الأدوات المستخدمة:</strong> Power BI / Excel (تحليل بيانات – نمذجة – تصورات تفاعلية)
-                    </div>
-                </div>
-                <div class="dashboard-container">
-                   <img src="project1-ecommerce.png" alt="لوحة تحكم مبيعات التجارة الإلكترونية" class="dashboard-image">
-                                        
-                </div>
-            </div>
+// ─── ACCORDION ───
+function toggleAcc(btn) {
+    const section = btn.closest('.acc-section');
+    section.classList.toggle('open');
+}
 
-            <!-- Project 2: Course Sales Dashboard -->
-            <div class="project-card">
-                <div class="project-header">
-                    <h3>مؤشرات أداء مبيعات الدورات 2024</h3>
-                    <div class="project-title-en">COURSE SALES DASHBOARD 2024</div>
-                    <p class="project-description">
-                        مشروع يركز على تحليل أداء مبيعات الدورات التدريبية خلال عام 2024 باستخدام مؤشرات أداء رئيسية (KPIs).
-                    </p>
+// ─── NAV SCROLL ───
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
 
-                    <div class="project-section">
-                        <h4>وصف المشروع</h4>
-                        <p style="color: #555; line-height: 1.8; font-size: 15px;">
-                            تم تطوير لوحة مؤشرات لعرض إجمالي الإيرادات، متوسط الإيراد، عدد الدورات المباعة، وعدد العملاء الفرديين عبر الأرباع الأربعة. كما شمل التحليل تصنيف الإيرادات حسب نوع الدورة، طرق الدفع، وأفضل 5 دورات مبيعاً، مع مؤشر شهري لقياس نمو الإيرادات.
-                        </p>
-                    </div>
+// ─── SCROLL REVEAL ───
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
-                    <div class="project-section">
-                        <h4>القيمة التحليلية</h4>
-                        <ul>
-                            <li>تقييم الأداء الربعي ومقارنة النمو بين الفترات</li>
-                            <li>تحديد الدورات الأعلى طلباً لدعم قرارات التوسع</li>
-                            <li>تحليل مساهمة كل نوع دورة في إجمالي الإيرادات</li>
-                            <li>قياس استقرار الإيرادات عبر المؤشر الشهري</li>
-                        </ul>
-                    </div>
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-                    <div class="project-tools">
-                        <strong>الأدوات المستخدمة:</strong> Power BI – تصميم KPIs – تحليل اتجاهات زمنية
-                    </div>
-                </div>
-                <div class="dashboard-container">
-                   <img src="project2-courses.png" alt="مؤشرات أداء مبيعات الدورات 2024" class="dashboard-image">
-                                        
-                </div>
-            </div>
+// ─── SMOOTH SCROLL ───
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
 
-            <!-- Project 3: Staff Report -->
-            <div class="project-card">
-                <div class="project-header">
-                    <h3>تقرير تحليل بيانات الموظفين</h3>
-                    <div class="project-title-en">STAFF REPORT</div>
-                    <p class="project-description">
-                        مشروع تحليلي لإدارة الموارد البشرية يهدف إلى فهم الهيكل الوظيفي والتوزيع الديموغرافي والرواتب.
-                    </p>
+// ─── RESTORE PREFS ───
+(function() {
+    const savedTheme = localStorage.getItem('theme');
+    const savedLang = localStorage.getItem('lang');
+    if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.getElementById('themeIcon').textContent = '☀';
+    }
+    if (savedLang === 'en') {
+        document.documentElement.setAttribute('data-lang', 'en');
+        document.documentElement.setAttribute('lang', 'en');
+        document.documentElement.setAttribute('dir', 'ltr');
+    }
+    // Apply language visibility on load
+    const lang = document.documentElement.getAttribute('data-lang') || 'ar';
+    document.querySelectorAll('.ar').forEach(el => {
+        el.style.display = lang === 'ar' ? '' : 'none';
+    });
+    document.querySelectorAll('.en').forEach(el => {
+        el.style.display = lang === 'en' ? '' : 'none';
+    });
+})();
+</script>
 
-                    <div class="project-section">
-                        <h4>وصف المشروع</h4>
-                        <p style="color: #555; line-height: 1.8; font-size: 15px;">
-                            تم إعداد تقرير شامل يعرض عدد الموظفين، متوسط الأعمار، إجمالي ومتوسط الرواتب، مع تحليل التوزيع حسب القسم، المدينة، والجنس. كما يتضمن مقارنة متوسط الرواتب بين الإدارات وتحليل العلاقة بين العمر والحالة الاجتماعية.
-                        </p>
-                    </div>
-
-                    <div class="project-section">
-                        <h4>القيمة التحليلية</h4>
-                        <ul>
-                            <li>دعم قرارات إدارة الموارد البشرية</li>
-                            <li>تحليل الفروقات في الرواتب بين الأقسام</li>
-                            <li>فهم التركيبة الديموغرافية للموظفين</li>
-                            <li>توفير رؤية شاملة لهيكل القوى العاملة</li>
-                        </ul>
-                    </div>
-
-                    <div class="project-tools">
-                        <strong>الأدوات المستخدمة:</strong> Power BI – تحليل وصفي – تصنيف وتجميع بيانات
-                    </div>
-                </div>
-                <div class="dashboard-container">
-                   <img src="project3-staff.png" alt="تقرير تحليل بيانات الموظفين" class="dashboard-image">
-                                        
-                </div>
-            </div>
-
-            <!-- Project 4: Pilgrim Flow Dashboard -->
-            <div class="project-card">
-                <div class="project-header">
-                    <h3>لوحة مؤشرات تدفق وتوزيع الحجاج</h3>
-                    <div class="project-title-en">PILGRIM FLOW AND DISTRIBUTION DASHBOARD</div>
-                    <p class="project-description">
-                        مشروع يركز على تحليل بيانات الحجاج لدعم التخطيط التشغيلي وصناع القرار.
-                    </p>
-
-                    <div class="project-section">
-                        <h4>وصف المشروع</h4>
-                        <p style="color: #555; line-height: 1.8; font-size: 15px;">
-                            تم تصميم لوحة تفاعلية تعرض أعداد الحجاج حسب الفئة والسنة، مع مقارنة بين الحجاج الداخليين والدوليين، وتحليل التوزيع حسب الجنس. كما تم تحليل بيانات مبادرة "طريق مكة" حسب الدولة والسنة لقياس الاستفادة منها.
-                        </p>
-                    </div>
-
-                    <div class="project-section">
-                        <h4>القيمة التحليلية</h4>
-                        <ul>
-                            <li>فهم التغير السنوي في أعداد الحجاج</li>
-                            <li>تحليل توزيع الحجاج جغرافياً وديموغرافياً</li>
-                            <li>دعم التخطيط اللوجستي وإدارة الحشود</li>
-                            <li>تقييم أثر مبادرات تسهيل الإجراءات</li>
-                        </ul>
-                    </div>
-
-                    <div class="project-tools">
-                        <strong>الأدوات المستخدمة:</strong> Power BI – تحليل اتجاهات – مقارنة زمنية
-                    </div>
-                </div>
-                <div class="dashboard-container">
-                    <img src="project4-hajj.png" alt="لوحة مؤشرات تدفق وتوزيع الحجاج" class="dashboard-image">
-                    
-                </div>
-            </div>
-
-            <!-- Project 5: Global Diet Cost Report -->
-            <div class="project-card">
-                <div class="project-header">
-                    <h3>تقرير التكلفة العالمية للنظام الغذائي الصحي</h3>
-                    <div class="project-title-en">GLOBAL COST OF A HEALTHY DIET REPORT</div>
-                    <p class="project-description">
-                        مشروع تحليلي دولي لدراسة تكلفة النظام الغذائي الصحي عبر الدول والمناطق.
-                    </p>
-
-                    <div class="project-section">
-                        <h4>وصف المشروع</h4>
-                        <p style="color: #555; line-height: 1.8; font-size: 15px;">
-                            تم تحليل بيانات تغطي عدة دول لقياس متوسط تكلفة النظام الغذائي الصحي (PPP وUSD)، مع دراسة الاتجاهات العالمية والإقليمية عبر السنوات. تضمن التقرير تصنيف الدول حسب مستوى التكلفة (مرتفع – متوسط)، وعرض أعلى الدول تكلفة سنوياً.
-                        </p>
-                    </div>
-
-                    <div class="project-section">
-                        <h4>القيمة التحليلية</h4>
-                        <ul>
-                            <li>مقارنة التفاوت الاقتصادي بين الدول</li>
-                            <li>تحليل الاتجاهات الزمنية لتكلفة الغذاء الصحي</li>
-                            <li>تحديد المناطق الأعلى عبئاً من حيث التكلفة</li>
-                            <li>دعم الدراسات المتعلقة بالأمن الغذائي والاستدامة</li>
-                        </ul>
-                    </div>
-
-                    <div class="project-tools">
-                        <strong>الأدوات المستخدمة:</strong> Power BI – تحليل بيانات دولية – تصورات مقارنة
-                    </div>
-                </div>
-                <div class="dashboard-container">
-                    <img src="project5-diet.png" alt="تقرير التكلفة العالمية للنظام الغذائي الصحي" class="dashboard-image">
-                    
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">تواصل معي</h2>
-                <p class="section-subtitle">
-                    أرحب دائماً بفرص التعاون والمشاريع الجديدة في مجال تحليل البيانات
-                </p>
-            </div>
-
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-icon">📧</div>
-                    <div class="contact-label">البريد الإلكتروني</div>
-                    <a href="mailto:maymariki.2@gmail.com">maymariki.2@gmail.com</a>
-                </div>
-
-                <div class="contact-item">
-                    <div class="contact-icon">📱</div>
-                    <div class="contact-label">الهاتف</div>
-                    <a href="tel:+966509438812">+966 509 438 812</a>
-                </div>
-
-                <div class="contact-item">
-                    <div class="contact-icon">💼</div>
-                    <div class="contact-label">LinkedIn</div>
-                    <a href="http://www.linkedin.com/in/may-mariki-612310221" target="_blank">May Mariki</a>
-                </div>
-            </div>
-
-            <div style="margin-top: 60px;">
-                <a href="mailto:maymariki.2@gmail.com" class="btn btn-primary">أرسل رسالة</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 مي مريكي. جميع الحقوق محفوظة | محللة بيانات متخصصة في لوحات المعلومات التنفيذية</p>
-        </div>
-    </footer>
-
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
+</body>
+</html>
